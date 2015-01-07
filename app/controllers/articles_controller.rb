@@ -4,6 +4,9 @@ class ArticlesController < ApplicationController
 	#Displays one blog post at a time
 	def show
 		@article = Article.find(params[:id])
+
+		@comment = Comment.new
+		@comment.article_id = @article.id
 	end
 	#Allows the user to write a new blog post
 	def new
@@ -20,14 +23,15 @@ class ArticlesController < ApplicationController
 		redirect_to article_path(@article)
 	end
 
+	#Deletes the article
 	def destroy
 		@article = Article.find(params[:id])
 		@article.destroy
 
-
 		redirect_to articles_path
 	end
 
+	#Edits the article
 	def edit
 		@article = Article.find(params[:id])
 	end
